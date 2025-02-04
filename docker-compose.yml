@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  scraper:
+    build: .
+    volumes:
+      - ./latest_updates.json:/app/latest_updates.json
+    environment:
+      - APIFY_PROXY_URL=${APIFY_PROXY_URL:-http://proxy.apify.com:8000}
+      - APIFY_USERNAME=${APIFY_USERNAME:-auto}
+      - APIFY_PASSWORD=${APIFY_PASSWORD:-apify_proxy_OeAkryP7pX1EeMyH1jwfRgftdPoum739cvLc}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
